@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>List of Bookmarks</title>
+  <link rel="shortcut icon" href="#">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>List of My Bookmarks</h1>
+      <div>
+          <button type="button">Add New Bookmark</button> 
+      </div>
+      <form>
+        Title <input type="text" title="bookmark-title"><br>
+        URL Link <input type="text" name="URL-link"><br>
+        Rating 
+        <div>
+          <input type="radio" id="rating-value" name="drone" value="1" checked><label for="1">1</label>
+        </div>  
+        <div>
+          <input type="radio" id="rating-value" name="drone" value="2"><label for="2">2</label>
+        </div>
+        <div>
+          <input type="radio" id="rating-value" name="drone" value="3"><label for="3">3</label>
+        </div>
+        <div>
+          <input type="radio" id="rating-value" name="drone" value="4"><label for="4">4</label>
+        </div>
+        <div>
+          <input type="radio" id="rating-value" name="drone" value="5"><label for="5">5</label>
+        </div><br>
+        Descrition <input type="text" placeholder= "Your description goes here..." name="description"><br>
+        <button type="button" class= "submit-item">Submit</button> 
+      </form> 
+      <div class = "dropdown">
+        <button type="button" class= "hide-button">Minimum Rating</button> 
+        <select name="ratings" class = "dropdown-options hidden-options">
+          <option value="1">1 Star</option>
+          <option value="2">2 Stars</option>
+          <option value="3">3 Stars</option>
+          <option value="4">4 Stars</option>
+          <option value="5">5 Stars</option>
+        </select>
+      </div>
+      <ul>
+        <li class="js-item-index-element" data-item-index="${itemIndex}">
+          <span class="bookmark-title">Google</span><br>
+          <span class="bookmark-rating">Rating 5 out of 5</span>
+          <div class="bookmark-item-controls">
+            <button class="condensed-view-toggle js-item-toggle">
+                <span class="button-label">More Info</span>
+            </button>
+            <button class="bookmark-item-delete js-item-delete">
+                <span class="button-label">Delete</span>
+            </button>
+          </div>
+          <div class="bookmark-item-not-condensed">
+            <span>Description...this will change eventually</span><br>
+            <button>
+              <span class="button-label">Visit Site</span>
+            </button>
+          </div>
+        </li>
+      </ul>
+    </div>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/cuid/1.3.8/browser-cuid.min.js"></script>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</body>
+</html>
