@@ -52,13 +52,17 @@ const bookmarkList = (function(){
       STORE.addingItem = !STORE.addingItem;
       if(STORE.addingItem === true){
         $('.add-form').append(
-          `<label for="bookmark-title">Title</label>
-          <input type="text" class="form-input" id="bookmark-title" name="bookmark-title" required><br>
+          `
+          <div class="form">
+          <label for="bookmark-title">Title</label>
+          <input required type="text" class="form-input" id="bookmark-title" name="bookmark-title"><br>
+          
           <label for="bookmark-url">URL Link</label>
-          <input type="text" class="form-input" id="bookmark-url" name="URL-link" required><br>
+          <input required ype="text" class="form-input" id="bookmark-url" name="URL-link"><br>
+          
           <label for="bookmark-rating">Rating</label> 
              <div>
-                 <input type="radio" class="form-input" id="rating-value" name="drone" value="1"><label for="1">1</label>
+                 <input required type="radio" class="form-input" id="rating-value" name="drone" value="1"><label for="1">1</label>
              </div>  
              <div>
                 <input type="radio" class="form-input" id="rating-value" name="drone" value="2"><label for="2">2</label>
@@ -71,13 +75,32 @@ const bookmarkList = (function(){
               </div>
               <div>
                   <input type="radio" class="form-input" id="rating-value" name="drone" value="5"><label for="5">5</label>
-                 </div><br>
+              </div><br>
+          
           <label for="bookmark-description">Description</label>
-          <input type="text" class="form-input" id="bookmark-description" placeholder= "Your description goes here..." name="description" required><br>
-          <button type="submit">Submit</button>
+          <input required type="text" class="form-input" id="bookmark-description" placeholder= "Your description goes here..." name="description"><br>
+          
+          <button type="submit" class="submit-button">
+            <span class="button-label">Submit</span>
+          </button>
+
+          
+          <button id="cancel-button">
+            <span class="button-label">Cancel</span>
+          </button>
+          </div>
           `
         );
       }
+      render();
+    });
+  }
+
+  function cancelFormButton(){
+    $('.add-form').on('click', '#cancel-button', event => {
+      event.preventDefault();
+      $('.form').remove();
+      STORE.addingItem = !STORE.addingItem;
       render();
     });
   }
@@ -88,13 +111,10 @@ const bookmarkList = (function(){
    */
   function submitNewItem(){
     $('.add-form').submit(event => {
-      event.preventDefault();
+      event.preventDefault()
       const newTitle = $(event.currentTarget).find('#bookmark-title').val();
       const newUrlLink = $(event.currentTarget).find('#bookmark-url').val();
-      //need to figure out how to capture the value of a radio button
       const newRating = $(event.currentTarget).find('#rating-value:checked').val();
-      console.log(newRating);
-      //$( "select#foo option:checked" ).val();
       const newDescription = $(event.currentTarget).find('#bookmark-description').val();
       const item ={
         title: newTitle,
@@ -148,6 +168,7 @@ const bookmarkList = (function(){
   function addingItemFunctions(){
     addItemButton();
     submitNewItem();
+    cancelFormButton();
   }
 
   //allows functions to be seen outside this file 

@@ -1,5 +1,5 @@
 'use strict';
-/* global, STORE */
+/* global $, STORE, bookmarkList */
 
 const filtering = (function(){
 
