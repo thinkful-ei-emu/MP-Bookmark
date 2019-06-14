@@ -5,7 +5,7 @@
   <link rel="shortcut icon" href="#">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="styles/index.css">
 </head>
 
 <body>
@@ -15,35 +15,10 @@
           <button type="button" class="add-bookmark-button">Add New Bookmark</button> 
       </div>
       <form class="add-form">
-        <label for="bookmark-title">Title</label>
-        <input type="text" class="form-input" id="bookmark-title" name="bookmark-title"><br>
-
-        <label for="bookmark-url">URL Link</label>
-        <input type="text" class="form-input" id="bookmark-url" name="URL-link"><br>
-        
-        <label for="bookmark-rating">Rating</label> 
-        <div>
-          <input type="radio" class="form-input" id="rating-value" name="drone" value="1" checked><label for="1">1</label>
-        </div>  
-        <div>
-          <input type="radio" class="form-input" id="rating-value" name="drone" value="2"><label for="2">2</label>
-        </div>
-        <div>
-          <input type="radio" class="form-input" id="rating-value" name="drone" value="3"><label for="3">3</label>
-        </div>
-        <div>
-          <input type="radio" class="form-input" id="rating-value" name="drone" value="4"><label for="4">4</label>
-        </div>
-        <div>
-          <input type="radio" class="form-input" id="rating-value" name="drone" value="5"><label for="5">5</label>
-        </div><br>
-        <label for="bookmark-description">Description</label>
-        <input type="text" class="form-input" id="bookmark-description" placeholder= "Your description goes here..." name="description"><br>
-        <button type="submit">Submit</button> 
       </form> 
       <div class = "dropdown">
-        <button type="button" class= "hide-button">Minimum Rating</button> 
         <select name="ratings" class = "dropdown-options hidden-options">
+          <option value="">Minimum Rating</option>
           <option value="1">1 Star</option>
           <option value="2">2 Stars</option>
           <option value="3">3 Stars</option>

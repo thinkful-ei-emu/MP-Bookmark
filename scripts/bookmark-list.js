@@ -1,5 +1,5 @@
 'use strict';
-/* global STORE, cuid */
+/* global STORE, $ cuid */
 
 /**
  *This JS file contains all functionality dealing with adding bookmark to the list 
@@ -10,11 +10,11 @@
  * Clicking on the Submit button 
  * event listner to add form input to the store and updating the DOM 
  */
-const bookmarkList = (function(){
 
+const bookmarkList = (function(){
   /**
    * 
-   * @param {*} item 
+   * @param {object} item 
    */
   function generateListItem(item){
     return `
@@ -53,19 +53,45 @@ const bookmarkList = (function(){
    */
   function addItemToList(newItem){
     STORE.bookmarks.push(newItem);
+    STORE.addingItem = !STORE.addingItem;
+
   }
 
-  // function addItemButton(){
-  //   $('.add-bookmark-button').on('click', event=> {
-  //     event.preventDefault();
-  //     console.log('add button pushed');
-  //     STORE.addingItem = !STORE.addingItem;
-  //     if(STORE.addingItem === true){
-  //       $(event.currentTarget.toggleClass(''))
-  //     }
-  //     render();
-  //   });
-  // }
+  function addItemButton(){
+    $('.add-bookmark-button').on('click', event=> {
+      event.preventDefault();
+      console.log('add button pushed');
+      STORE.addingItem = !STORE.addingItem;
+      if(STORE.addingItem === true){
+        $('.add-form').append(
+          `<label for="bookmark-title">Title</label>
+          <input type="text" class="form-input" id="bookmark-title" name="bookmark-title" required><br>
+          <label for="bookmark-url">URL Link</label>
+          <input type="text" class="form-input" id="bookmark-url" name="URL-link" required><br>
+          <label for="bookmark-rating">Rating</label> 
+             <div>
+                 <input type="radio" class="form-input" id="rating-value" name="drone" value="1" checked><label for="1">1</label>
+             </div>  
+             <div>
+                <input type="radio" class="form-input" id="rating-value" name="drone" value="2"><label for="2">2</label>
+              </div>
+              <div>
+                 <input type="radio" class="form-input" id="rating-value" name="drone" value="3"><label for="3">3</label>
+              </div>
+              <div>
+                 <input type="radio" class="form-input" id="rating-value" name="drone" value="4"><label for="4">4</label>
+               </div>
+                <div>
+                   <input type="radio" class="form-input" id="rating-value" name="drone" value="5"><label for="5">5</label>
+                 </div><br>
+          <label for="bookmark-description">Description</label>
+          <input type="text" class="form-input" id="bookmark-description" placeholder= "Your description goes here..." name="description" required><br>
+          <button type="submit">Submit</button>`
+        );
+      }
+      render();
+    });
+  }
 
   /**
    * if time come back to this and convert to use formData method
@@ -102,12 +128,11 @@ $('#contactForm').submit(event => {
         rating: newRating,
         description: newDescription
       };
-      //clears values
-      $('.form-input').val('');
-      
       //adds item to the STORE
       const forSTORE= Object.assign(item, {id: cuid(), expanded: false});
       addItemToList(forSTORE);
+      STORE.addingItem = !STORE.addingItem;
+
       //updates the DOM
       render();
     });
@@ -130,7 +155,7 @@ $('#contactForm').submit(event => {
    * 
    */
   function addingItemFunctions(){
-    //addItemButton();
+    addItemButton();
     submitNewItem();
   }
 

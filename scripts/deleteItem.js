@@ -1,11 +1,11 @@
 'use strict';
-/* global STORE*/
+/* global $, STORE*/
 
 const deletingItems = (function(){
 
-/**
- * event listener for clicking the delete button
- */
+  /**
+  * event listener for clicking the delete button
+  */
   function clickDelete(){
     $('.bookmark-list').on('click', '.js-item-delete', event =>{
       const selectedBookmark = identifyItemById(event.currentTarget);
