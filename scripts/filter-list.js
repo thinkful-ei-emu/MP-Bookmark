@@ -4,8 +4,8 @@
 const filtering = (function(){
 
   function dropDownInput(){
-    $('select').change(function(){
-      const value = $('select').val();
+    $('#dropdown-options').change(function(){
+      const value = $('#dropdown-options').val();
       STORE.minimumValue = value;
       bookmarkList.render();
     });

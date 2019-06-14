@@ -58,7 +58,7 @@ const bookmarkList = (function(){
           <input type="text" class="form-input" id="bookmark-url" name="URL-link" required><br>
           <label for="bookmark-rating">Rating</label> 
              <div>
-                 <input type="radio" class="form-input" id="rating-value" name="drone" value="1" checked><label for="1">1</label>
+                 <input type="radio" class="form-input" id="rating-value" name="drone" value="1"><label for="1">1</label>
              </div>  
              <div>
                 <input type="radio" class="form-input" id="rating-value" name="drone" value="2"><label for="2">2</label>
@@ -68,9 +68,9 @@ const bookmarkList = (function(){
               </div>
               <div>
                  <input type="radio" class="form-input" id="rating-value" name="drone" value="4"><label for="4">4</label>
-               </div>
-                <div>
-                   <input type="radio" class="form-input" id="rating-value" name="drone" value="5"><label for="5">5</label>
+              </div>
+              <div>
+                  <input type="radio" class="form-input" id="rating-value" name="drone" value="5"><label for="5">5</label>
                  </div><br>
           <label for="bookmark-description">Description</label>
           <input type="text" class="form-input" id="bookmark-description" placeholder= "Your description goes here..." name="description" required><br>
@@ -92,7 +92,8 @@ const bookmarkList = (function(){
       const newTitle = $(event.currentTarget).find('#bookmark-title').val();
       const newUrlLink = $(event.currentTarget).find('#bookmark-url').val();
       //need to figure out how to capture the value of a radio button
-      const newRating = $(event.currentTarget).find('input[type=radio][name=bookmark-rating]:checked').val();
+      const newRating = $(event.currentTarget).find('#rating-value:checked').val();
+      console.log(newRating);
       //$( "select#foo option:checked" ).val();
       const newDescription = $(event.currentTarget).find('#bookmark-description').val();
       const item ={
