@@ -111,7 +111,7 @@ const bookmarkList = (function(){
    */
   function submitNewItem(){
     $('.add-form').submit(event => {
-      event.preventDefault()
+      event.preventDefault();
       const newTitle = $(event.currentTarget).find('#bookmark-title').val();
       const newUrlLink = $(event.currentTarget).find('#bookmark-url').val();
       const newRating = $(event.currentTarget).find('#rating-value:checked').val();
@@ -180,7 +180,7 @@ const bookmarkList = (function(){
 
 
 
-  /**
+/**
    * if time come back to this and convert to use formData method
    * for the submit new item function
    * EXAMPLE FROM GOOGLE DOC

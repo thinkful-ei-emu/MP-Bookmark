@@ -1,5 +1,5 @@
 'use strict';
-/* global $, STORE*/
+/* global bookmarkList, $, STORE*/
 // eslint-disable-next-line no-unused-vars
 
 

@@ -1,5 +1,5 @@
 'use strict';
-/* global bookmarkList, deletingItems, filtering, expandingItem, cuid */
+/* global $, bookmarkList, deletingItems, filtering, expandingItem, cuid */
 
 const STORE={
   bookmarks: [
