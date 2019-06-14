@@ -1,5 +1,7 @@
 'use strict';
 /* global $, STORE*/
+// eslint-disable-next-line no-unused-vars
+
 
 const deletingItems = (function(){
 
@@ -7,7 +9,7 @@ const deletingItems = (function(){
   * event listener for clicking the delete button
   */
   function clickDelete(){
-    $('.bookmark-list').on('click', '.js-item-delete', event =>{
+    $('.bookmark-list').on('click', '.bookmark-item-delete', event =>{
       const selectedBookmark = identifyItemById(event.currentTarget);
       deleteListItem(selectedBookmark);
       bookmarkList.render();
@@ -23,6 +25,7 @@ const deletingItems = (function(){
     STORE.bookmarks.splice(index, 1);
   }
   
+  
   /**
    * needed to make sure we are deleting the correct item from the list
    * @param {*} item 
@@ -34,6 +37,7 @@ const deletingItems = (function(){
   }
 
   return{
-    clickDelete
+    clickDelete,
+    identifyItemById
   };
 }());

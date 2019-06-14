@@ -1,19 +1,15 @@
 'use strict';
 /* global STORE, $ cuid */
-
 /**
  *This JS file contains all functionality dealing with adding bookmark to the list 
- *
  * Clicking on the Add New Bookmark button 
  * event listener to display form 
- * 
  * Clicking on the Submit button 
  * event listner to add form input to the store and updating the DOM 
  */
-
 const bookmarkList = (function(){
   /**
-   * 
+   * template for all items to be added to the list
    * @param {object} item 
    */
   function generateListItem(item){
@@ -22,24 +18,18 @@ const bookmarkList = (function(){
     <span class="bookmark-title">${item.title}</span><br>
     <span class="bookmark-rating">Rating ${item.rating} out of 5</span>
     <div class="bookmark-item-controls">
-      <button class="condensed-view-toggle js-item-toggle">
+      <button class="condensed-view-button">
           <span class="button-label">More Info</span>
       </button>
-      <button class="bookmark-item-delete js-item-delete">
+      <button class="bookmark-item-delete">
           <span class="button-label">Delete</span>
       </button>
-    </div>
-    <div class="bookmark-item-not-condensed">
-      <span>${item.description}</span><br>
-      <form>
-        <input type="button" value="Visit Site" onclick="window.location.href=${item.url}"/>
-      </form>
     </div>
   </li>`;
   }
 
   /**
-   * 
+   * converts the list of items into a string
    * @param {*} list 
    */
   function generateBookmarkString(list){
@@ -48,19 +38,11 @@ const bookmarkList = (function(){
   }
 
   /**
-   * 
-   * @param {*} newItem 
+   * This function displays the form when user clicks add button
    */
-  function addItemToList(newItem){
-    STORE.bookmarks.push(newItem);
-    STORE.addingItem = !STORE.addingItem;
-
-  }
-
   function addItemButton(){
     $('.add-bookmark-button').on('click', event=> {
       event.preventDefault();
-      console.log('add button pushed');
       STORE.addingItem = !STORE.addingItem;
       if(STORE.addingItem === true){
         $('.add-form').append(
@@ -94,24 +76,8 @@ const bookmarkList = (function(){
   }
 
   /**
-   * if time come back to this and convert to use formData method
-   * 
-   * EXAMPLE FROM GOOGLE DOC
-   * function serializeJson(form) {
-  const formData = new FormData(form);
-  const o = {};
-  formData.forEach((val, name) => o[name] = val);
-  return JSON.stringify(o);
-}
-
-$('#contactForm').submit(event => {
-  event.preventDefault();
-  // These two lines are THE SAME
-  // let formElement = document.querySelector("#contactForm");
-  let formElement = $('#contactForm')[0];
-  // the [0] here selects the native element
-  console.log( serializeJson(formElement) );
-});
+   * this function captures the values from the user submitted form 
+   * and sends those to the addItemToList
    */
   function submitNewItem(){
     $('.add-form').submit(event => {
@@ -138,8 +104,20 @@ $('#contactForm').submit(event => {
     });
   }
 
+
   /**
-   * 
+   * This function updates the store by adding the new item to the bookmarks array 
+   * and changes the status of the addingItem method 
+   * @param {*} newItem 
+   */
+  function addItemToList(newItem){
+    STORE.bookmarks.push(newItem);
+    STORE.addingItem = !STORE.addingItem;
+  }
+
+
+  /**
+   * used to render the page
    */
   function render(){
     // Filter item list if store prop is true by item.checked === false
@@ -165,3 +143,26 @@ $('#contactForm').submit(event => {
     addingItemFunctions,
   };
 }());
+
+
+
+  /**
+   * if time come back to this and convert to use formData method
+   * for the submit new item function
+   * EXAMPLE FROM GOOGLE DOC
+   * function serializeJson(form) {
+  const formData = new FormData(form);
+  const o = {};
+  formData.forEach((val, name) => o[name] = val);
+  return JSON.stringify(o);
+}
+
+$('#contactForm').submit(event => {
+  event.preventDefault();
+  // These two lines are THE SAME
+  // let formElement = document.querySelector("#contactForm");
+  let formElement = $('#contactForm')[0];
+  // the [0] here selects the native element
+  console.log( serializeJson(formElement) );
+});
+   */
