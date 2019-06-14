@@ -10,6 +10,30 @@ const STORE={
       description: 'This is a description',
       rating: 2,
       expanded: false
+    },
+    {
+      id: cuid(),
+      title: 'Google2',
+      url: 'http://google.com',
+      description: 'This is a description',
+      rating: 2,
+      expanded: false
+    },
+    {
+      id: cuid(),
+      title: 'Google3',
+      url: 'http://google.com',
+      description: 'This is a description',
+      rating: 2,
+      expanded: false
+    },
+    {
+      id: cuid(),
+      title: 'Google4',
+      url: 'http://google.com',
+      description: 'This is a description',
+      rating: 2,
+      expanded: false
     }
   ],
   addingItem: false,
@@ -18,8 +42,9 @@ const STORE={
 };
 
 function main(){
-  bookmarkList.bindEventListeners();
+  bookmarkList.addingItemFunctions();
   bookmarkList.render();
+  deletingItems.clickDelete();
 }
 
 $(main);

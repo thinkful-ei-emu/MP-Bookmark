@@ -2,23 +2,17 @@
 /* global STORE, cuid */
 
 /**
- * my iffy function that will expose general functions that will be used 
- * throughout the app
+ *This JS file contains all functionality dealing with adding bookmark to the list 
+ *
+ * Clicking on the Add New Bookmark button 
+ * event listener to display form 
+ * 
+ * Clicking on the Submit button 
+ * event listner to add form input to the store and updating the DOM 
  */
 const bookmarkList = (function(){
 
-  function render(){
-    // Filter item list if store prop is true by item.checked === false
-    let items = [ ...STORE.bookmarks ];
-    // render the shopping list in the DOM
-    console.log('`render` ran');
-    const bookmarkItems = generateBookmarkString(items);
-    // insert that HTML into the DOM
-    $('.bookmark-list').html(bookmarkItems);
-  }
-
   function generateListItem(item){
-    console.log('generate item', item);
     return `
     <li class="js-item-index-element" data-item-index="${item.id}">
     <span class="bookmark-title">${item.title}</span><br>
@@ -46,22 +40,20 @@ const bookmarkList = (function(){
   }
 
   function addItemToList(newItem){
-    console.log('addItem ran');
     STORE.bookmarks.push(newItem);
-    console.log('STORE', STORE);
   }
 
-  function addItemButton(){
-    $('.add-bookmark-button').on('click', event=> {
-      event.preventDefault();
-      //console.log('add button pushed');
-      // STORE.addingItem = !STORE.addingItem;
-      // if(STORE.addingItem === true){
-      //   $(event.currentTarget.toggleClass(''))
-      // }
-      // render();
-    });
-  }
+  // function addItemButton(){
+  //   $('.add-bookmark-button').on('click', event=> {
+  //     event.preventDefault();
+  //     console.log('add button pushed');
+  //     STORE.addingItem = !STORE.addingItem;
+  //     if(STORE.addingItem === true){
+  //       $(event.currentTarget.toggleClass(''))
+  //     }
+  //     render();
+  //   });
+  // }
 
   function submitNewItem(){
     $('.add-form').submit(event => {
@@ -83,22 +75,33 @@ const bookmarkList = (function(){
       };
       //clears values
       $('.form-input').val('');
+      
       //adds item to the STORE
       const forSTORE= Object.assign(item, {id: cuid(), expanded: false});
-      console.log('new item', forSTORE);
       addItemToList(forSTORE);
       //updates the DOM
       render();
     });
   }
 
-  function bindEventListeners(){
-    addItemButton();
+  function render(){
+    // Filter item list if store prop is true by item.checked === false
+    let items = [ ...STORE.bookmarks ];
+    // render the shopping list in the DOM
+    console.log('`render` ran');
+    const bookmarkItems = generateBookmarkString(items);
+    // insert that HTML into the DOM
+    $('.bookmark-list').html(bookmarkItems);
+  }
+
+  function addingItemFunctions(){
+    //addItemButton();
     submitNewItem();
   }
 
+  //allows functions to be seen outside this file 
   return{
     render,
-    bindEventListeners,
+    addingItemFunctions,
   };
 }());
