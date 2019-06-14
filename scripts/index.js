@@ -1,35 +1,11 @@
 'use strict';
-/* global bookmarkList, STORE, cuid */
+/* global bookmarkList, deletingItems, filtering, expandingItem, cuid */
 
 const STORE={
   bookmarks: [
     {
       id: cuid(),
       title: 'Google',
-      url: 'http://google.com',
-      description: 'This is a description',
-      rating: 2,
-      expanded: false
-    },
-    {
-      id: cuid(),
-      title: 'Google2',
-      url: 'http://google.com',
-      description: 'This is a description',
-      rating: 2,
-      expanded: false
-    },
-    {
-      id: cuid(),
-      title: 'Google3',
-      url: 'http://google.com',
-      description: 'This is a description',
-      rating: 2,
-      expanded: false
-    },
-    {
-      id: cuid(),
-      title: 'Google4',
       url: 'http://google.com',
       description: 'This is a description',
       rating: 2,
@@ -46,6 +22,7 @@ function main(){
   bookmarkList.render();
   deletingItems.clickDelete();
   filtering.dropDownInput();
+  expandingItem.clickMoreInfo();
 }
 
 $(main);

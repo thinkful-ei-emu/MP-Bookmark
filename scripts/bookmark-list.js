@@ -12,6 +12,10 @@
  */
 const bookmarkList = (function(){
 
+  /**
+   * 
+   * @param {*} item 
+   */
   function generateListItem(item){
     return `
     <li class="js-item-index-element" data-item-index="${item.id}">
@@ -34,11 +38,19 @@ const bookmarkList = (function(){
   </li>`;
   }
 
+  /**
+   * 
+   * @param {*} list 
+   */
   function generateBookmarkString(list){
     const items = list.map((item)=> generateListItem(item));
     return items.join('');
   }
 
+  /**
+   * 
+   * @param {*} newItem 
+   */
   function addItemToList(newItem){
     STORE.bookmarks.push(newItem);
   }
@@ -55,14 +67,31 @@ const bookmarkList = (function(){
   //   });
   // }
 
+  /**
+   * if time come back to this and convert to use formData method
+   * 
+   * EXAMPLE FROM GOOGLE DOC
+   * function serializeJson(form) {
+  const formData = new FormData(form);
+  const o = {};
+  formData.forEach((val, name) => o[name] = val);
+  return JSON.stringify(o);
+}
+
+$('#contactForm').submit(event => {
+  event.preventDefault();
+  // These two lines are THE SAME
+  // let formElement = document.querySelector("#contactForm");
+  let formElement = $('#contactForm')[0];
+  // the [0] here selects the native element
+  console.log( serializeJson(formElement) );
+});
+   */
   function submitNewItem(){
     $('.add-form').submit(event => {
       event.preventDefault();
-
-      //can't find or remember slides on the better way to handle data here...
       const newTitle = $(event.currentTarget).find('#bookmark-title').val();
       const newUrlLink = $(event.currentTarget).find('#bookmark-url').val();
-
       //need to figure out how to capture the value of a radio button
       const newRating = $(event.currentTarget).find('input[type=radio][name=bookmark-rating]:checked').val();
       //$( "select#foo option:checked" ).val();
@@ -84,6 +113,9 @@ const bookmarkList = (function(){
     });
   }
 
+  /**
+   * 
+   */
   function render(){
     // Filter item list if store prop is true by item.checked === false
     let items = [ ...STORE.bookmarks ];
@@ -94,6 +126,9 @@ const bookmarkList = (function(){
     $('.bookmark-list').html(bookmarkItems);
   }
 
+  /**
+   * 
+   */
   function addingItemFunctions(){
     //addItemButton();
     submitNewItem();
