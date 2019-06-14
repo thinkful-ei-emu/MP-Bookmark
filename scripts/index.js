@@ -45,6 +45,7 @@ function main(){
   bookmarkList.addingItemFunctions();
   bookmarkList.render();
   deletingItems.clickDelete();
+  filtering.dropDownInput();
 }
 
 $(main);

@@ -1,5 +1,5 @@
 'use strict';
-/* global STORE, cuid */
+/* global STORE*/
 
 const deletingItems = (function(){
 
@@ -7,7 +7,6 @@ const deletingItems = (function(){
   function clickDelete(){
     $('.bookmark-list').on('click', '.js-item-delete', event =>{
       const selectedBookmark = identifyItemById(event.currentTarget);
-      console.log(event);
       deleteListItem(selectedBookmark);
       bookmarkList.render();
     });
