@@ -1,20 +1,17 @@
 'use strict';
-/* global STORE*/
+/* global, STORE */
 
 const filtering = (function(){
 
   function dropDownInput(){
-
+    $('select').change(function(){
+      const value = $('select').val();
+      STORE.minimumValue = value;
+      bookmarkList.render();
+    });
   }
 
-  function filterList(){
-
-  }
-
-  
   return{
     dropDownInput
   };
 }());
-
-//om change

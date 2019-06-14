@@ -25,7 +25,13 @@ const bookmarkList = (function(){
           <span class="button-label">Delete</span>
       </button>
     </div>
-  </li>`;
+    <div class="bookmark-item-not-condensed">
+      <span>${item.description}</span><br>
+    <form>
+      <input type="button" value="Visit Site" onclick="window.location.href=${item.url}"/>
+    </form>
+    </div>
+    </li>`;
   }
 
   /**
@@ -68,7 +74,8 @@ const bookmarkList = (function(){
                  </div><br>
           <label for="bookmark-description">Description</label>
           <input type="text" class="form-input" id="bookmark-description" placeholder= "Your description goes here..." name="description" required><br>
-          <button type="submit">Submit</button>`
+          <button type="submit">Submit</button>
+          `
         );
       }
       render();
@@ -124,6 +131,11 @@ const bookmarkList = (function(){
     let items = [ ...STORE.bookmarks ];
     // render the shopping list in the DOM
     console.log('`render` ran');
+
+    if (STORE.minimumValue > 1){
+      items = items.filter(item => item.rating >= STORE.minimumValue);
+    }
+
     const bookmarkItems = generateBookmarkString(items);
     // insert that HTML into the DOM
     $('.bookmark-list').html(bookmarkItems);
