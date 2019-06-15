@@ -15,6 +15,10 @@ ul{
   list-style-type: none;
 } 
 
+/* .bookmark-item-not-condensed{
+  display: none !important
+} */
+
 .hide-more-info{
   display: none;
 }

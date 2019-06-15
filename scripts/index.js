@@ -34,8 +34,7 @@ function main(){
 }
 
 $(main).ready(function(){
-  api.getItems()
-    .then(item => {
-      console.log(item);
-    });
+  // api.getItems()
+  //   .then(item => {
+  //   });
 });

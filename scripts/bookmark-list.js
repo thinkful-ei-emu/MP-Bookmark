@@ -25,10 +25,10 @@ const bookmarkList = (function(){
           <span class="button-label">Delete</span>
       </button>
     </div>
-    <div class="bookmark-item-not-condensed">
+    <div class="bookmark-item-not-condensed hide-more-info">
       <span>${item.description}</span><br>
     <form>
-      <input type="button" value="Visit Site" onclick="window.location.href="${item.url}"/>
+      <input type="button" value="Visit Site" onclick="window.location.href='https://www.google.com/'" />
     </form>
     </div>
     </li>`;
