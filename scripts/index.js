@@ -1,5 +1,5 @@
 'use strict';
-/* global $, bookmarkList, deletingItems, filtering, expandingItem, cuid */
+/* global $, api, bookmarkList, deletingItems, filtering, expandingItem, cuid */
 
 const STORE={
   bookmarks: [
@@ -33,4 +33,9 @@ function main(){
   expandingItem.clickMoreInfo();
 }
 
-$(main);
+$(main).ready(function(){
+  api.getItems()
+    .then(item => {
+      console.log(item);
+    });
+});

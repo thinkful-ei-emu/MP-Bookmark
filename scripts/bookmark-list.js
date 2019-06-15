@@ -28,7 +28,7 @@ const bookmarkList = (function(){
     <div class="bookmark-item-not-condensed">
       <span>${item.description}</span><br>
     <form>
-      <input type="button" value="Visit Site" onclick="window.location.href=${item.url}"/>
+      <input type="button" value="Visit Site" onclick="window.location.href="${item.url}"/>
     </form>
     </div>
     </li>`;
@@ -83,7 +83,6 @@ const bookmarkList = (function(){
           <button type="submit" class="submit-button">
             <span class="button-label">Submit</span>
           </button>
-
           
           <button id="cancel-button">
             <span class="button-label">Cancel</span>
@@ -126,7 +125,6 @@ const bookmarkList = (function(){
       const forSTORE= Object.assign(item, {id: cuid(), expanded: false});
       addItemToList(forSTORE);
       STORE.addingItem = !STORE.addingItem;
-
       //updates the DOM
       render();
     });
@@ -190,7 +188,6 @@ const bookmarkList = (function(){
   formData.forEach((val, name) => o[name] = val);
   return JSON.stringify(o);
 }
-
 $('#contactForm').submit(event => {
   event.preventDefault();
   // These two lines are THE SAME

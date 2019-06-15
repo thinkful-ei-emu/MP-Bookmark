@@ -1,18 +1,19 @@
 'use strict';
-/* global bookmarkList, $, STORE*/
+/* global bookmarkList, api, $, STORE*/
 // eslint-disable-next-line no-unused-vars
 
-
 const deletingItems = (function(){
-
   /**
   * event listener for clicking the delete button
   */
   function clickDelete(){
     $('.bookmark-list').on('click', '.bookmark-item-delete', event =>{
       const selectedBookmark = identifyItemById(event.currentTarget);
-      deleteListItem(selectedBookmark);
-      bookmarkList.render();
+      api.deleteItem(selectedBookmark)
+        .then(()=> {
+          deleteListItem(selectedBookmark);
+          bookmarkList.render();
+        });
     });
   }
 
@@ -24,7 +25,6 @@ const deletingItems = (function(){
     const index = STORE.bookmarks.findIndex(item=> item.id === selectedBookmark);
     STORE.bookmarks.splice(index, 1);
   }
-  
   
   /**
    * needed to make sure we are deleting the correct item from the list
