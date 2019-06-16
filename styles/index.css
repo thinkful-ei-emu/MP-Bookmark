@@ -1,26 +1,53 @@
-/* .hidden-options{
-  display: none;
-}  */
+* {
+  box-sizing: border-box;
+}
 
-/* .hide-button{
-  display: none;
-}   */
-
- /* form{
-  display: none;
-}    */
-
+header{
+  text-align: center;
+}
 
 ul{
   list-style-type: none;
+  padding-left: 0;
 } 
 
-/* .bookmark-item-not-condensed{
-  display: none !important
-} */
+li{
+  border: solid black 1px;
+}
 
 .hide-more-info{
   display: none;
 }
 
-/*modal to display over the screen*/
+.submit-form, .form, .list, .landing-page{
+  width: 400px;
+  margin: auto;
+}
+
+@media only screen and (max-width: 600px) {
+  .submit-form, .form, .list, .landing-page{
+    width: 300px;
+    margin: auto;
+  }
+}
+
+.error-content {
+  position: fixed;
+  top: 15px;
+  right: 20px;
+  border: 2px solid red;
+  background-color: lightsalmon;
+}
+
+.error-content p {
+  margin-top: 1px;
+  padding: 7px;
+}
+
+.error-content button {
+  font-size: 6pt;
+  background-color: red;
+  color: white;
+  position: relative;
+  left: 80%;
+}

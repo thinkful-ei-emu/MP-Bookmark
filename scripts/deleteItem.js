@@ -13,6 +13,10 @@ const deletingItems = (function(){
         .then(()=> {
           deleteListItem(selectedBookmark);
           bookmarkList.render();
+        })
+        .catch((err) => {
+          bookmarkList.setError(err.message);
+          bookmarkList.renderError();
         });
     });
   }

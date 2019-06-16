@@ -19,9 +19,8 @@ function main(){
 $(main).ready(function(){
   api.getItems()
     .then((bookmarks) => {
-      console.log(bookmarks);
       STORE.bookmarks = bookmarks;
       bookmarkList.render();
     })
-    .catch(err => {});
+    .catch(err => console.log(err.message));
 });

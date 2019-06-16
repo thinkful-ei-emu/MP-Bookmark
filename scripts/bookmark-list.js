@@ -1,5 +1,5 @@
 'use strict';
-/* global STORE, api, $, cuid */
+/* global STORE, api, $*/
 /**
  *This JS file contains all functionality dealing with adding bookmark to the list 
  * Clicking on the Add New Bookmark button 
@@ -55,45 +55,35 @@ const bookmarkList = (function(){
         $('.add-form').append(
           `
           <div class="form">
-          <div class="form-group">
-              <label for="bookmark-title">Title</label>
-              <input required type="text" class="form-control form-input" id="bookmark-title" name="bookmark-title">
+            <label for="bookmark-title">Title</label>
+            <input required type="text" id="bookmark-title" name="bookmark-title"><br>
+
+            <label for="bookmark-url">URL Link</label>
+            <input type="text" placeholder= "http://..." id="bookmark-url" name="URL-link"><br>
+
+            <label for="bookmark-rating">Rating</label> 
+
+              <input type="radio" id="rating-value" name="drone" value="1">
+              <label for="1">1</label>
+
+              <input type="radio" id="rating-value" name="drone" value="2">
+              <label for="2">2</label>
+
+              <input type="radio" id="rating-value" name="drone" value="3">
+              <label for="3">3</label>
+
+              <input type="radio" id="rating-value" name="drone" value="4">
+              <label for="4">4</label>
+
+              <input type="radio" id="rating-value" name="drone" value="5">
+              <label for="5">5</label><br>
+
+            <label for="bookmark-description">Description</label>
+            <input type="text" id="bookmark-description" placeholder= "Your description goes here..." name="description"><br>
+
+          <button type="submit">Submit</button>
+          <button id="cancel-button">Cancel</button>
           </div>
-          <div class="form-group">
-              <label for="bookmark-url">URL Link</label>
-              <input required ype="text" class="form-control form-input" placeholder= "http://..." id="bookmark-url" name="URL-link">
-          </div>
-          <div class="form-group">
-              <label for="bookmark-rating">Rating</label> 
-              <div class="form-check form-check-inline">
-                  <input required type="radio" class="form-check-input" id="rating-value" name="drone" value="1">
-                  <label class="form-check-label" for="1">1</label>
-              </div>  
-              <div class="form-check form-check-inline">
-                 <input type="radio" class="form-check-input" id="rating-value" name="drone" value="2">
-                 <label class="form-check-label" for="2">2</label>
-               </div>
-               <div class="form-check form-check-inline">
-                  <input type="radio" class="form-check-input" id="rating-value" name="drone" value="3">
-                  <label class="form-check-label" for="3">3</label>
-               </div>
-               <div class="form-check form-check-inline"> 
-                  <input type="radio" class="form-check-input" id="rating-value" name="drone" value="4">
-                  <label class="form-check-label" for="4">4</label>
-               </div>
-               <div class="form-check form-check-inline">
-                   <input type="radio" class="form-check-input" id="rating-value" name="drone" value="5">
-                   <label class="form-check-label" for="5">5</label>
-               </div>
-          </div>
-          <div class="form-group">
-              <label for="bookmark-description">Description</label>
-              <input required type="text" class="form-control form-input" id="bookmark-description" placeholder= "Your description goes here..." name="description">  
-          </div>
-            <div>
-            <button type="submit" class="submit-button btn btn-success">Submit</button>
-            <button id="cancel-button" class="btn btn-danger">Cancel</button>
-            </div>
           `
         );
       }
@@ -128,7 +118,11 @@ const bookmarkList = (function(){
       //adds item to the STORE
       const forSTORE= Object.assign(item, {expanded: false});
       api.createItem(forSTORE)
-        .then( api.getItems());
+        .then(api.getItems())
+        .catch((err) => {
+          setError(err.message);
+          renderError();
+        });
     });
   }
 
@@ -136,6 +130,7 @@ const bookmarkList = (function(){
    * used to render the page
    */
   function render(){
+    renderError();
     // Filter item list if store prop is true by item.checked === false
     let items = [...STORE.bookmarks];
     if (STORE.minimumValue > 1){
@@ -146,10 +141,41 @@ const bookmarkList = (function(){
     $('.bookmark-list').html(bookmarkItems);
   }
 
+  function renderError(){
+    if (STORE.error) {
+      const el = generateError(STORE.error);
+      $('.error-container').html(el);
+    } else {
+      $('.error-container').empty();
+    }
+  }
+
+  function generateError(message){
+    return `
+      <section class="error-content">
+        <button id="cancel-error">X</button>
+        <p>${message}</p>
+      </section>
+    `;
+  }
+
+  function setError (error) {
+    STORE.error = error;
+  }
+
+  function handleCloseError() {
+    $('.error-container').on('click', '#cancel-error', () => {
+      STORE.error = null;
+      renderError();
+    });
+  }
+
   function addingItemFunctions(){
     addItemButton();
     submitNewItem();
     cancelFormButton();
+    handleCloseError();
+    setError();
   }
 
   //allows functions to be seen outside this file 
