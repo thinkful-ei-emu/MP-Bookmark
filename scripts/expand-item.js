@@ -3,6 +3,10 @@
 
 // eslint-disable-next-line no-unused-vars
 
+/**
+ * event listener on the button that changes the state of the store
+ * and runs the list item to the display function
+ */
 const expandingItem = (function(){
 
   function clickMoreInfo(){
@@ -10,16 +14,17 @@ const expandingItem = (function(){
       event.preventDefault();
       STORE.bookmarks.expanded = !STORE.bookmarks.expanded;
       const listItem = $(event.currentTarget).closest('li').find('.bookmark-item-not-condensed');
-      console.log(1, listItem);
       displayMoreInfo(listItem);
       
     });
   }
 
-  //render for expanded
+  /**
+   * toggles the class to the specific item in the list
+   * @param {*} listItem 
+   */
   function displayMoreInfo(listItem){
     listItem.toggleClass('hide-more-info');
-    console.log(2, listItem);
   }
 
   return{

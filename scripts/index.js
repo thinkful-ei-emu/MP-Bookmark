@@ -2,26 +2,9 @@
 /* global $, api, bookmarkList, deletingItems, filtering, expandingItem, cuid */
 
 const STORE={
-  bookmarks: [
-    {
-      id: cuid(),
-      title: 'Google',
-      url: 'http://google.com',
-      description: 'This is a description',
-      rating: 2,
-      expanded: false
-    },
-    {
-      id: cuid(),
-      title: 'Google',
-      url: 'http://google.com',
-      description: 'This is a description',
-      rating: 4,
-      expanded: false
-    }
-  ],
+  bookmarks: [],
   addingItem: false,
-  errorMessage: null,
+  error: null,
   minimumValue: 1
 };
 
@@ -34,7 +17,11 @@ function main(){
 }
 
 $(main).ready(function(){
-  // api.getItems()
-  //   .then(item => {
-  //   });
+  api.getItems()
+    .then((bookmarks) => {
+      console.log(bookmarks);
+      STORE.bookmarks = bookmarks;
+      bookmarkList.render();
+    })
+    .catch(err => {});
 });

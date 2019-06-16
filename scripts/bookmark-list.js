@@ -1,5 +1,5 @@
 'use strict';
-/* global STORE, $ cuid */
+/* global STORE, api, $, cuid */
 /**
  *This JS file contains all functionality dealing with adding bookmark to the list 
  * Clicking on the Add New Bookmark button 
@@ -26,7 +26,7 @@ const bookmarkList = (function(){
       </button>
     </div>
     <div class="bookmark-item-not-condensed hide-more-info">
-      <span>${item.description}</span><br>
+      <span>${item.desc}</span><br>
     <form>
       <input type="button" value="Visit Site" onclick="window.location.href='https://www.google.com/'" />
     </form>
@@ -58,7 +58,7 @@ const bookmarkList = (function(){
           <input required type="text" class="form-input" id="bookmark-title" name="bookmark-title"><br>
           
           <label for="bookmark-url">URL Link</label>
-          <input required ype="text" class="form-input" id="bookmark-url" name="URL-link"><br>
+          <input required ype="text" class="form-input" placeholder= "http://..." id="bookmark-url" name="URL-link"><br>
           
           <label for="bookmark-rating">Rating</label> 
              <div>
@@ -119,28 +119,14 @@ const bookmarkList = (function(){
         title: newTitle,
         url: newUrlLink,
         rating: newRating,
-        description: newDescription
+        desc: newDescription
       };
       //adds item to the STORE
-      const forSTORE= Object.assign(item, {id: cuid(), expanded: false});
-      addItemToList(forSTORE);
-      STORE.addingItem = !STORE.addingItem;
-      //updates the DOM
-      render();
+      const forSTORE= Object.assign(item, {expanded: false});
+      api.createItem(forSTORE)
+        .then( api.getItems());
     });
   }
-
-
-  /**
-   * This function updates the store by adding the new item to the bookmarks array 
-   * and changes the status of the addingItem method 
-   * @param {*} newItem 
-   */
-  function addItemToList(newItem){
-    STORE.bookmarks.push(newItem);
-    STORE.addingItem = !STORE.addingItem;
-  }
-
 
   /**
    * used to render the page
@@ -148,21 +134,14 @@ const bookmarkList = (function(){
   function render(){
     // Filter item list if store prop is true by item.checked === false
     let items = [ ...STORE.bookmarks ];
-    // render the shopping list in the DOM
-    console.log('`render` ran');
-
     if (STORE.minimumValue > 1){
       items = items.filter(item => item.rating >= STORE.minimumValue);
     }
-
     const bookmarkItems = generateBookmarkString(items);
     // insert that HTML into the DOM
     $('.bookmark-list').html(bookmarkItems);
   }
 
-  /**
-   * 
-   */
   function addingItemFunctions(){
     addItemButton();
     submitNewItem();
@@ -175,25 +154,3 @@ const bookmarkList = (function(){
     addingItemFunctions,
   };
 }());
-
-
-
-/**
-   * if time come back to this and convert to use formData method
-   * for the submit new item function
-   * EXAMPLE FROM GOOGLE DOC
-   * function serializeJson(form) {
-  const formData = new FormData(form);
-  const o = {};
-  formData.forEach((val, name) => o[name] = val);
-  return JSON.stringify(o);
-}
-$('#contactForm').submit(event => {
-  event.preventDefault();
-  // These two lines are THE SAME
-  // let formElement = document.querySelector("#contactForm");
-  let formElement = $('#contactForm')[0];
-  // the [0] here selects the native element
-  console.log( serializeJson(formElement) );
-});
-   */
